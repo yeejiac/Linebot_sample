@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import sys
+parent_dir = os.path.dirname(sys.path[0])
+sys.path.insert(0, parent_dir)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +33,7 @@ ALLOWED_HOSTS = [
     'yeejiacbot.herokuapp.com'
 ]
 
-LINE_CHANNEL_ACCESS_TOKEN = "iXJnNC39LYFYMPUVjiF/M71szVpY46aTYYwdX86BeBp9JrwSY4dXyhyrByYLnZu+KoRGW1WYbR4D4pxSLUfO07wg+7aA4sqA3rkTSaZiR3Hjyn2ApgW6X/D3vMIAxaZ96EXNz0rU6BMZ+WPG2oaOoQdB04t89/1O/w1cDnyilFU="
+LINE_CHANNEL_ACCESS_TOKEN = 'iXJnNC39LYFYMPUVjiF/M71szVpY46aTYYwdX86BeBp9JrwSY4dXyhyrByYLnZu+KoRGW1WYbR4D4pxSLUfO07wg+7aA4sqA3rkTSaZiR3Hjyn2ApgW6X/D3vMIAxaZ96EXNz0rU6BMZ+WPG2oaOoQdB04t89/1O/w1cDnyilFU='
 LINE_CHANNEL_SECRET = '6c9f46c22ef85ffdea2eb5d403acb445'
 
 # Application definition
