@@ -13,9 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+import sys
+parent_dir = os.path.dirname(sys.path[0])
+sys.path.insert(0, parent_dir)
 from django.contrib import admin
-from django.urls import path
+from runserver.views import callback
+from django.urls import path, include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('mylinebot/callback', callback)
 ]
