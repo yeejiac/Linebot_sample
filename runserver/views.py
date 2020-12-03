@@ -28,11 +28,10 @@ def callback(request):
                 if event.type == "message":
                     if event.message.type == 'location':
                         print("HI")
-                        locations = Location.objects.filter(area=event.message.text)
                         line_bot_api.reply_message( event.reply_token, [
                             {
                                 type: 'text',
-                                text: locations.latitude + "," + locations.longitude
+                                text: event.message.latitude + "," + event.message.longitude
                             }
                         ])         
                     else:
