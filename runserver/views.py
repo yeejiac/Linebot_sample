@@ -30,8 +30,8 @@ def callback(request):
                         print("HI")
                         line_bot_api.reply_message( event.reply_token, [
                             {
-                                type: 'text',
-                                text: event.message.latitude + "," + event.message.longitude
+                                "type": 'text',
+                                "text":  event.message.latitude + "," + event.message.longitude
                             }
                         ])         
                     else:
