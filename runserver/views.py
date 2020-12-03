@@ -30,11 +30,7 @@ def callback(request):
                     if event.message.type == 'location':
                         print("HI")
                         reply_text = str(event.message.latitude) + "," + str(event.message.longitude)
-                        message = {
-                            'type': 'text',
-                            'text': reply_text
-                        } 
-                        line_bot_api.reply_message( event.reply_token, json.loads(message))         
+                        line_bot_api.reply_message( event.reply_token, TextSendMessage(text=reply_text))         
                     else:
                         line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 else:
