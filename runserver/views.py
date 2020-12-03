@@ -6,6 +6,7 @@ from django.conf import settings
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
+import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
@@ -22,7 +23,7 @@ def callback(request):
             return HttpResponseForbidden()
         except LineBotApiError:
             return HttpResponseBadRequest()
- 
+        print(events)
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 if event.type == "message":
@@ -33,7 +34,7 @@ def callback(request):
                             'type': 'text',
                             'text': reply_text
                         } 
-                        line_bot_api.reply_message( event.reply_token, message)         
+                        line_bot_api.reply_message( event.reply_token, json.loads(message))         
                     else:
                         line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 else:
