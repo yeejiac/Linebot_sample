@@ -25,17 +25,20 @@ def callback(request):
  
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
-                if event.type == 'location':
-                    print("HI")
-                    locations = Location.objects.filter(area=event.message.text)
-                    line_bot_api.reply_message( event.reply_token, [
-                        {
-                            type: 'text',
-                            text: locations.latitude + "," + locations.longitude
-                        }
-                    ])         
+                if event.type == "message":
+                    if event.message == 'location':
+                        print("HI")
+                        locations = Location.objects.filter(area=event.message.text)
+                        line_bot_api.reply_message( event.reply_token, [
+                            {
+                                type: 'text',
+                                text: locations.latitude + "," + locations.longitude
+                            }
+                        ])         
+                    else:
+                        line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 else:
-                    line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
+                    print("un recognize message")
                     
         return HttpResponse()
     else:
