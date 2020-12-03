@@ -9,16 +9,9 @@ from linebot.models import MessageEvent, TextSendMessage
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
-# Create your views here.
 
 @csrf_exempt
 def callback(request):
-    reply_text = ''
-    message = {
-      type: 'text',
-      text: reply_text
-    }
- 
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
@@ -36,8 +29,11 @@ def callback(request):
                     line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 elif event.type == "location":
                     locations = Location.objects.filter(area=event.message.text)
-                    reply_text =  locations.latitude + "," + locations.longitude
-                    line_bot_api.reply_message( event.reply_token, message)
+                    textmessage = {
+                        type: 'text',
+                        text: locations.latitude + "," + locations.longitude
+                    }
+                    line_bot_api.reply_message( event.reply_token, textmessage)
                 else:
                     line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                     
