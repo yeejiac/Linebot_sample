@@ -30,7 +30,9 @@ SECRET_KEY = '1+l3z2-fs-8(5#!9mu@7umgx!o0&u0f5vb^_2w!_8fyj$qt_qg'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'yeejiacbot.herokuapp.com'
+    'yeejiacbot.herokuapp.com',
+    'localhost',
+    '127.0.0.1'
 ]
 
 LINE_CHANNEL_ACCESS_TOKEN = 'iXJnNC39LYFYMPUVjiF/M71szVpY46aTYYwdX86BeBp9JrwSY4dXyhyrByYLnZu+KoRGW1WYbR4D4pxSLUfO07wg+7aA4sqA3rkTSaZiR3Hjyn2ApgW6X/D3vMIAxaZ96EXNz0rU6BMZ+WPG2oaOoQdB04t89/1O/w1cDnyilFU='
