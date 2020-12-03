@@ -27,10 +27,14 @@ def callback(request):
  
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
-                line_bot_api.reply_message(  # 回復傳入的訊息文字
-                    event.reply_token,
-                    TextSendMessage(text=event.message.text)
-                )
+                if(event.type == "text")
+                    line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
+                elif(event.type == "location")
+                    locations = Location.objects.filter(area=event.message.text)
+                    content =  locations.latitude + "," + locations.longitude
+                    line_bot_api.reply_message( event.reply_token, content(text=event.message.text))
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
+
+def 
