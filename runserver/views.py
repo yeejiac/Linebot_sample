@@ -11,6 +11,11 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 # Create your views here.
 
+message = {
+      type: 'text',
+      text: reply_text
+    }
+
 @csrf_exempt
 def callback(request):
  
@@ -31,8 +36,8 @@ def callback(request):
                     line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 elif event.type == "location":
                     locations = Location.objects.filter(area=event.message.text)
-                    content =  locations.latitude + "," + locations.longitude
-                    line_bot_api.reply_message( event.reply_token, content(text=event.message.text))
+                    reply_text =  locations.latitude + "," + locations.longitude
+                    line_bot_api.reply_message( event.reply_token, message)
                 else:
                     line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                     
