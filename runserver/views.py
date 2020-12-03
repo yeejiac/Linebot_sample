@@ -26,7 +26,7 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 if event.type == "message":
-                    if event.message == 'location':
+                    if event.message.type == 'location':
                         print("HI")
                         locations = Location.objects.filter(area=event.message.text)
                         line_bot_api.reply_message( event.reply_token, [
