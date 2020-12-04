@@ -6,6 +6,7 @@ from django.conf import settings
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
+from runserver.locationTransfer import get_nearby_restaurant
 import json
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
@@ -28,9 +29,9 @@ def callback(request):
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 if event.type == "message":
                     if event.message.type == 'location':
-                        print("HI")
-                        reply_text = str(event.message.latitude) + "," + str(event.message.longitude)
-                        line_bot_api.reply_message( event.reply_token, TextSendMessage(text=reply_text))         
+                        urlList = get_nearby_restaurant(str(event.message.latitude), str(event.message.longitude))
+                        for i in urlList:
+                            line_bot_api.reply_message( event.reply_token, TextSendMessage(text=i))         
                     else:
                         line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 else:
