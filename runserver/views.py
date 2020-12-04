@@ -30,10 +30,7 @@ def callback(request):
                 if event.type == "message":
                     if event.message.type == 'location':
                         urlList = get_nearby_restaurant(str(event.message.latitude), str(event.message.longitude))
-                        print(urlList)
-                        for i in urlList:
-                            print(i)
-                            line_bot_api.reply_message( event.reply_token, TextSendMessage(text=i))         
+                        line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList[0:5]]])         
                     else:
                         line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
                 else:
