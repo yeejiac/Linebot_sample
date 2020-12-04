@@ -11,7 +11,7 @@ load_dotenv(dotenv_path, override=True)  # 設定 override 才會更新變數哦
 def get_nearby_restaurant(lon, lat):
     GOOGLE_PLACES_API_KEY = os.environ.get("GOOGLE_PLACES_API_KEY")
     gmaps = googlemaps.Client(key=GOOGLE_PLACES_API_KEY)
-    location = (25.017156, 121.506359)
+    location = (lon, lat)
     radius = 500
     place_type = 'restaurant'
     places_radar_result = gmaps.places_nearby(location, radius, type=place_type)
