@@ -17,7 +17,7 @@ def get_nearby_restaurant(lon, lat):
     places_radar_result = gmaps.places_nearby(location, radius, type=place_type)
     if places_radar_result['status'] == 'OK':
         print(places_radar_result)
-        urlstring = ['https://www.google.com/maps/place/?q=place_id:'+i['place_id'] for i in places_radar_result['results'] if float(i['rating']) > 4 and i['opening_hours']['open_now']==True]
+        urlstring = ['https://www.google.com/maps/place/?q=place_id:'+i['place_id'] for i in places_radar_result['results'] if i['opening_hours']['open_now']==True]
         print(urlstring)
         # return urlstring
     else:
