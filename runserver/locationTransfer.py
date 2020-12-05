@@ -15,10 +15,14 @@ def get_nearby_restaurant(lon, lat):
     radius = 500
     place_type = 'restaurant'
     places_radar_result = gmaps.places_nearby(location, radius, type=place_type)
-    urlstring = ['https://www.google.com/maps/place/?q=place_id:'+i['place_id'] for i in places_radar_result['results'] if float(i['rating']) > 4 and i['opening_hours']['open_now']==True]
-    # print(urlstring)
-    return urlstring
+    if places_radar_result['status'] == 'OK':
+        print(places_radar_result)
+        urlstring = ['https://www.google.com/maps/place/?q=place_id:'+i['place_id'] for i in places_radar_result['results'] if float(i['rating']) > 4 and i['opening_hours']['open_now']==True]
+        print(urlstring)
+        # return urlstring
+    else:
+        return []
 
 
-# if __name__ == '__main__':
-#     get_nearby_restaurant(25.042363209943446, 121.56481611369205)
+if __name__ == '__main__':
+    get_nearby_restaurant(25.042363209943446, 121.56481611369205)
