@@ -14,7 +14,9 @@ parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 def handle_text(event):
     if event.message.text == "我是87":
-        line_bot_api.reply_message( event.reply_token, TextSendMessage(text='你是87'))
+        line_bot_api.reply_message( event.reply_token, TextSendMessage(text='你才87'))
+    elif event.message.text == "你是87":
+        line_bot_api.reply_message( event.reply_token, TextSendMessage(text='對'))
     else:
         line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
 
