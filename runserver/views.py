@@ -12,6 +12,13 @@ import json
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
+def handle_text(event):
+    if event.message.text == "我是87":
+        line_bot_api.reply_message( event.reply_token, TextSendMessage(text='你是87'))
+    else:
+        line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
+
+
 @csrf_exempt
 def callback(request):
     if request.method == 'POST':
@@ -24,7 +31,6 @@ def callback(request):
             return HttpResponseForbidden()
         except LineBotApiError:
             return HttpResponseBadRequest()
-        print(events)
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 if event.type == "message":
@@ -33,13 +39,16 @@ def callback(request):
                         if not urlList:
                             line_bot_api.reply_message( event.reply_token, TextSendMessage(text='error happen'))
                         else:
-                            line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList[0:5]])         
+                            line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList[0:5]])
+                    if event.message.type == "text":
+                        handle_text(event)
                     else:
-                        line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
+                        line_bot_api.reply_message( event.reply_token, TextSendMessage(text='我聽不懂'))
                 else:
                     print("un recognize message")
                     
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
+
 
