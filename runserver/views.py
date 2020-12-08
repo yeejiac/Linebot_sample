@@ -41,7 +41,7 @@ def callback(request):
                         if not urlList:
                             line_bot_api.reply_message( event.reply_token, TextSendMessage(text='error happen'))
                         else:
-                            line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList])
+                            line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList[0:5]])
                     if event.message.type == "text":
                         handle_text(event)
                     else:
