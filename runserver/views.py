@@ -26,7 +26,6 @@ def callback(request):
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
- 
         try:
             events = parser.parse(body, signature)  # 傳入的事件
         except InvalidSignatureError:
@@ -35,13 +34,14 @@ def callback(request):
             return HttpResponseBadRequest()
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
+                print(event)
                 if event.type == "message":
                     if event.message.type == 'location':
                         urlList = get_nearby_restaurant(str(event.message.latitude), str(event.message.longitude))
                         if not urlList:
                             line_bot_api.reply_message( event.reply_token, TextSendMessage(text='error happen'))
                         else:
-                            line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList[0:5]])
+                            line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList])
                     if event.message.type == "text":
                         handle_text(event)
                     else:
