@@ -14,4 +14,5 @@ def getlocationInfo():
     return jsonify({'result': list_res})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    print(u'\u4e0d\u8981')
