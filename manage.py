@@ -2,7 +2,9 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+parent_dir = os.path.dirname(sys.path[0])
+sys.path.insert(0, parent_dir)
+import gunicorn
 
 def main():
     """Run administrative tasks."""
