@@ -21,7 +21,6 @@ from django.contrib import admin
 from runserver.views import callback
 from django.urls import path, include
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mylinebot/callback/', callback)
