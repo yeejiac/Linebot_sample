@@ -6,6 +6,7 @@ parent_dir = os.path.dirname(sys.path[0])
 sys.path.insert(0, parent_dir)
 import gunicorn
 
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mylinebot.settings')
