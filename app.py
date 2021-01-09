@@ -29,7 +29,7 @@ def handle_text(event):
 def callback():
     if request.method == 'POST':
         signature = request.headers['X-Line-Signature']
-        body = request.body.decode('utf-8')
+        body = request.get_data(as_text=True)
         try:
             events = parser.parse(body, signature)  # 傳入的事件
             for event in events:
