@@ -25,7 +25,7 @@ def handle_text(event):
         line_bot_api.reply_message( event.reply_token, TextSendMessage(text=event.message.text))
 
 
-@app.route("/mylinebot/callback/", methods=['POST'])
+@app.route("/mylinebot/callback", methods=['POST','GET'])
 def callback(request):
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
