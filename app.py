@@ -28,7 +28,7 @@ def handle_text(event):
 @app.route("/mylinebot/callback", methods=['POST'])
 def callback():
     if request.method == 'POST':
-        signature = request.META['HTTP_X_LINE_SIGNATURE']
+        signature = request.headers['X-Line-Signature']
         body = request.body.decode('utf-8')
         try:
             events = parser.parse(body, signature)  # 傳入的事件
