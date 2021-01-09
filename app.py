@@ -30,6 +30,7 @@ def callback():
     if request.method == 'POST':
         signature = request.headers['X-Line-Signature']
         body = request.get_data(as_text=True)
+        print("body:",body)
         try:
             events = parser.parse(body, signature)  # 傳入的事件
             for event in events:
