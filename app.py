@@ -33,6 +33,8 @@ def callback():
         print("body:",body)
         try:
             events = parser.parse(body, signature)  # 傳入的事件
+            if events == []:
+                return "OK"
             for event in events:
                 if isinstance(event, MessageEvent):  # 如果有訊息事件
                     print(event)
