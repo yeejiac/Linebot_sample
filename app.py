@@ -5,6 +5,7 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
 from locationTransfer import get_nearby_restaurant
+from insertToDB import insertDB
 import json
 
 
@@ -52,7 +53,8 @@ def callback():
                                     line_bot_api.reply_message( event.reply_token, [TextSendMessage(text= i) for i in urlList[0:5]])
                         if event.message.type == "text":
                             handle_text(event)
-                            # data = [event.source.user_id, "", event.message.text]
+                            data = [event.source.user_id, "", event.message.text]
+                            insertDB(data)
                         else:
                             line_bot_api.reply_message( event.reply_token, TextSendMessage(text='我聽不懂'))
                     else:

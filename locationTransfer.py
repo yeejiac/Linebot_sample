@@ -25,5 +25,5 @@ def get_nearby_restaurant(lon, lat):
         return []
 
 
-if __name__ == '__main__':
-    get_nearby_restaurant(25.042363209943446, 121.56481611369205)
+# if __name__ == '__main__':
+#     get_nearby_restaurant(25.042363209943446, 121.56481611369205)
