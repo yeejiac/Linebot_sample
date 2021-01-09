@@ -4,10 +4,7 @@ import sys
 parent_dir = os.path.dirname(sys.path[0])
 sys.path.insert(0, parent_dir)
 import configparser
-from dotenv import load_dotenv, find_dotenv
 from os.path import join, dirname
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path, override=True)
 
 config = configparser.ConfigParser()
 config.read("config.ini")
