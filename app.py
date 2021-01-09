@@ -6,7 +6,7 @@ from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
 from locationTransfer import get_nearby_restaurant
 import json
-import pandas as pd
+
 
 app = Flask(__name__)
 config = configparser.ConfigParser()
